@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { SyntheticEvent } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { IProduct } from "../interfaces/productInterface";
+import {baseUrl} from "../src/config"
 
 function EditProduct() {
   const { productId } = useParams();
@@ -24,7 +25,7 @@ function EditProduct() {
 
   React.useEffect(() => {
     async function fetchProducts() {
-      const resp = await fetch(`/api/products/${productId}`);
+      const resp = await fetch(`${baseUrl}/products/${productId}`);
       const productData = await resp.json();
       setFormData(productData);
     }
@@ -34,7 +35,7 @@ function EditProduct() {
   async function handleSubmit(e: SyntheticEvent) {
     e.preventDefault();
     const token = localStorage.getItem("token");
-    const resp = await axios.put(`/api/products/${productId}`, formData, {
+    const resp = await axios.put(`${baseUrl}/products/${productId}`, formData, {
       headers: { Authorization: `Bearer ${token}` },
     });
     navigate(`/product/${productId}`);

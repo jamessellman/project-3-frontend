@@ -10,12 +10,13 @@ import CreateProduct from "../components/CreateProduct";
 import ShowProduct from "../components/ShowProduct";
 import SellerHome from "../components/SellerHomePage";
 import EditProduct from "../components/EditProduct";
-
+import {baseUrl} from "../src/config"
+ 
 function App() {
   const [user, setUser] = useState(null);
   async function fetchUser() {
     const token = localStorage.getItem("token");
-    const resp = await axios.get("/api/signup", {
+    const resp = await axios.get(`${baseUrl}/signup`, {
       headers: { Authorization: `Bearer ${token}` },
     });
     setUser(resp.data);

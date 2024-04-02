@@ -4,6 +4,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Confetti from "react-confetti";
 import { useWindowSize } from "@uidotdev/usehooks";
+import {baseUrl} from "../src/config"
 
 type ISelectedCountry = string;
 
@@ -43,10 +44,10 @@ function Checkout({ price, title, _id }: IProduct) {
   }
 
   async function completePurchase() {
-    const resp = await fetch(`/api/products/${_id}`);
+    const resp = await fetch(`${baseUrl}/products/${_id}`);
     const data = await resp.json();
     data.unitsSold++;
-    const update = await axios.post(`/api/unitsSold/${_id}`, {
+    const update = await axios.post(`${baseUrl}/unitsSold/${_id}`, {
       unitsSold: data.unitsSold,
     });
     setModalIsActive(true);

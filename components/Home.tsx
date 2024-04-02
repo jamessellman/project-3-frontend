@@ -2,13 +2,14 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import HomePageProductCard from "./ProductCategoryCard";
 import axios from "axios";
+import {baseUrl} from "../src/config"
 
 function Home() {
   const navigate = useNavigate();
   const [categories, setCategories] = React.useState([]);
 
   async function fetchCategories() {
-    const resp = await axios.get("/api/categories");
+    const resp = await axios.get(`${baseUrl}/categories`);
     setCategories(resp.data);
   }
 

@@ -1,6 +1,7 @@
 import React from "react";
 import ProductCard from "./ProductCard";
 import { IProduct } from "../interfaces/productInterface";
+import { baseUrl } from "../src/config";
 
 type Products = null | Array<IProduct>;
 
@@ -12,7 +13,7 @@ function ProductsList() {
   // FUNCTION TO RETURN ALL DATA
   React.useEffect(() => {
     async function fetchProducts() {
-      const resp = await fetch("/api/products");
+      const resp = await fetch(`${baseUrl}/products`);
       const data = await resp.json();
       console.log("fetch 1", data);
       setProducts(data);
@@ -53,10 +54,10 @@ function ProductsList() {
   console.log("value in drop down", value);
   return (
     <>
-      <section className="hero">
-        <figure className="image image is-3by1">
-          <img src="../img/list-page-banner.jpg" />
-        </figure>
+      <section className="hero is-medium has-text-centered">
+        <div className="hero-body bg-img2">
+          <p className="title">Product List</p>
+        </div>
       </section>
 
       <section>
@@ -81,8 +82,7 @@ function ProductsList() {
                 <select
                   value={value}
                   onChange={handleDropdownChange}
-                  className="has-background-warning has-text-dark"
-                >
+                  className="has-background-warning has-text-dark">
                   {dropdownCategoryOptions.map((option: any) => {
                     return (
                       <option key={option.value} value={option.value}>

@@ -2,6 +2,7 @@ import React, { SyntheticEvent } from "react";
 import { IProduct } from "../interfaces/productInterface";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import {baseUrl} from "../src/config"
 
 interface IReview {
   name: string;
@@ -20,7 +21,7 @@ function Reviews({ _id, reviews }: IProduct) {
   const [isButtonDisabled, setIsButtonDisabled] = React.useState(true);
 
   async function getReviews() {
-    const resp = await fetch(`/api/products/${_id}`);
+    const resp = await fetch(`${baseUrl}/products/${_id}`);
     const product = await resp.json();
     console.log(product);
     setDisplayedReviews(product.reviews);
@@ -43,7 +44,7 @@ function Reviews({ _id, reviews }: IProduct) {
 
   async function handleClick(e: SyntheticEvent) {
     e.preventDefault();
-    await axios.put(`/api/reviews/${_id}`, {
+    await axios.put(`${baseUrl}/reviews/${_id}`, {
       reviews: [{ name: textInput.name, review: textInput.review_text }],
     });
     window.location.reload();

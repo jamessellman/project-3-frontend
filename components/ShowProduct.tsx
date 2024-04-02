@@ -8,6 +8,7 @@ import Checkout from "./Checkout";
 import { Link } from "react-router-dom";
 // import {IndividualProduct} from "../components/ShowindividualCard"
 import Reviews from "./Reviews";
+import {baseUrl} from "../src/config"
 
 function ShowProduct({ user }: { user: null | IUser }) {
   const [product, setProducts] = React.useState<IProduct | null>(null);
@@ -23,7 +24,7 @@ function ShowProduct({ user }: { user: null | IUser }) {
 
   React.useEffect(() => {
     async function fetchProducts() {
-      const resp = await fetch(`/api/products/${productId}`);
+      const resp = await fetch(`${baseUrl}/products/${productId}`);
       const productData = await resp.json();
       setProducts(productData);
     }
@@ -33,7 +34,7 @@ function ShowProduct({ user }: { user: null | IUser }) {
   async function deleteProduct(e: SyntheticEvent) {
     try {
       const token = localStorage.getItem("token");
-      await axios.delete("/api/products/" + productId, {
+      await axios.delete(`${baseUrl}/products/` + productId, {
         headers: { Authorization: `Bearer ${token}` },
       });
       navigate("/sellerhome");
@@ -57,7 +58,7 @@ function ShowProduct({ user }: { user: null | IUser }) {
   const [sellerName, setSellerName] = React.useState(null);
 
   async function fetchSeller() {
-    const res = await fetch(`/api/findSellerName/${productId}`);
+    const res = await fetch(`${baseUrl}/findSellerName/${productId}`);
     const userData = await res.json();
     // console.log(userData);
     setSellerName(userData.userName);

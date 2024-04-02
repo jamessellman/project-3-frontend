@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { IProduct } from "../interfaces/productInterface";
 import SellerProductCard from "./SellerProductCard";
 import { useNavigate } from "react-router-dom";
+import {baseUrl} from "../src/config"
 
 type Products = null | Array<IProduct>;
 
@@ -14,7 +15,7 @@ function SellerHome({ user }: any) {
     async function fetchProducts() {
       if (!user || !user._id) return; // Check if user and user._id are present
       console.log(user);
-      const response = await fetch(`/api/getProducts/${user._id}`);
+      const response = await fetch(`${baseUrl}/getProducts/${user._id}`);
       const data = await response.json();
       setProducts(data);
 
