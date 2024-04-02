@@ -5,7 +5,6 @@ import { IProduct } from "../interfaces/productInterface";
 type Products = null | Array<IProduct>;
 
 function ProductsList() {
-  // const [category, setCategory] = React.useState<any>([]);
   const [products, setProducts] = React.useState<Products>([]);
   const [search, setSearch] = React.useState("");
   const [value, setValue] = React.useState("");
@@ -104,7 +103,6 @@ function ProductsList() {
               return (
                 <ProductCard
                   key={product._id}
-                  // ! Pass all properties, don't have to declar them individually.
                   {...product}
                 />
               );

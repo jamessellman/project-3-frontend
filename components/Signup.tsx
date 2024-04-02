@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 
 export default function UserSignup() {
   const navigate = useNavigate();
-  //we have to set state for the user. here we can set the state for all 4 inputs. the state should start with an empty string.
   const [formData, setFormData] = useState({
     userName: "",
     email: "",
@@ -26,11 +25,8 @@ export default function UserSignup() {
       password: "",
       confirmPassword: "",
     });
-    // we can store the input from the desired target through the name. which we defined in the actual input
     const fieldName = e.target.name;
-    //to mutate this we have to clone because react will cry
     const newFormData = structuredClone(formData);
-    //here we can set the form data to what in the e.target.name
     newFormData[fieldName as keyof typeof formData] = e.target.value;
     setFormData(newFormData);
   }
@@ -55,7 +51,6 @@ export default function UserSignup() {
     <div className="section">
       <p className="title has-text-centered mb-5"> Sign Up Here 👇🏽</p>
       <div className="container">
-        {/* As its a form we have to do an onsubmit rather than on onclick */}
         <form onSubmit={handleSubmit}>
           <div className="field">
             <label className="label">Username</label>
@@ -66,9 +61,7 @@ export default function UserSignup() {
                 type="text"
                 placeholder="Enter Your Name"
                 name={"userName"}
-                // call the handle change function on an onchange
                 onChange={handleChange}
-                // here is where we target the user in the state
                 value={formData.userName}
               />
               {errorData.userName && (

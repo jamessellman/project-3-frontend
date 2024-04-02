@@ -83,9 +83,6 @@ $footer-background-color: #363636;
 $footer-padding: 2rem 1.5rem;
 $box-padding: 1rem;
 
-// ! example on how to customize, skip to section "Add your own Bulma styles":
 // https://bulma.io/documentation/customize/with-sass-cli/
 
-// ? Import bulma, all customizations should live above this line.
-// @import "../../node_modules/bulma/bulma.sass";
 @import "../node_modules/bulma/bulma.scss";

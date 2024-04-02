@@ -75,12 +75,11 @@ function SellerHome({ user }: any) {
               products.map((product: any) => (
                 <SellerProductCard
                   key={product._id}
-                  // ! Pass all properties, don't have to declar them individually.
                   {...product}
                 />
               ))
             ) : (
-              <p> Add your first product by clicking the button above! 🎉</p> // or display "No products found" based on your preference
+              <p> Add your first product by clicking the button above! 🎉</p> 
             )}
           </div>
         </div>
