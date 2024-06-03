@@ -2,9 +2,9 @@
 
 # Description
 
-- We have developed an E-SHOP where sellers can showcase their delicious products for sale. Sellers have the ability to edit and delete their products if they are the ones who added the product to our database.
-- Users can visit our website to explore the wide range of products available and make purchases as desired. Additionally, users have the option to leave reviews for products they have experienced.
-- Upon a successful purchase, the number of units sold for the respective product will increase, while also aggregating the total sales across all products for that particular seller.
+Gourmet E-Shop is a website where sellers can display their products for sale. Sellers can edit and delete their own products from our database. Users can browse our website to discover a variety of products and make purchases. They can also leave reviews for products they've tried. Successful purchases increase the units sold for the product and aggregate total sales for the seller.
+
+![alt text](<Screenshot 2024-05-11 at 16.58.08.png>)
 
 # Deployment link
 
@@ -13,11 +13,13 @@
 
 # Getting Started/Code Installation
 
-- Ensure that mongod is running to initialize the database.
-- Open your terminal and navigate to the frontend directory.
-- Type npm run dev in the terminal to start Vite and open a browser containing the frontend.
-- Open another terminal window or tab and navigate to the backend directory.
-- Type npm run dev in the terminal to start the backend server and establish communication with the database.
+```
+1. Clone the front-end repository to your local machine.
+2. Navigate to the root of the project directory.
+3. Run `npm install` to install all dependencies.
+4. Execute `npm run dev` to start the development server.
+5. Open your browser and go to `http://localhost:3000` to view the app.
+```
 
 # Timeframe & Working Team (Solo/Pair/Group)
 
@@ -27,26 +29,34 @@
 
   https://github.com/livdarby
 
-- We were tasked with completing our full-stack application within a tight deadline of one week. This encompassed designing and populating our database, developing fully operational routes and controllers, and crafting a user-friendly interface to effectively showcase and interact with our data on the front end.
+- We had one week to complete our full-stack application. This involved designing and populating our database, creating fully operational routes and controllers, and crafting a user-friendly interface to interact with our data on the front end.
 
 # Technologies Used
 
-- Express
-- React
-- Mongodb
-- Mongoose
+## Front-end
+
 - HTML
 - CSS
 - Bulma
-- Mongo Atlas
-- Netlify
-- GitHub
-- Mongodbcompass
+- React
+
+## Back-end
+
+- Express
+- Mongodb
+- Mongoose
+- Mongo Atlas- Mongodbcompass
 - Insomnia
 
-# Brief
+## Deployment
 
-You must:
+- Netlify
+
+## Version control
+
+- GitHub
+
+# Brief
 
 - Work in a team, using **git to code collaboratively**.
 - **Build a full-stack application** by making your own backend and your own front-end
@@ -57,113 +67,116 @@ You must:
 - **Have a visually impressive design** to kick your portfolio up a notch and have something to wow future clients & employers. **ALLOW** time for this.
 - **Be deployed online** so it's publicly accessible.
 
-# Planning
+# Build/Code Process
+
+### Planning (Day 1)
+
+- Our first task was conceptualizing our project. We settled on developing an E-shop platform where sellers could showcase their products, and users could browse, leave feedback, and make purchases. We then wireframed and designed our project, as detailed in the planning section of this README.
 
 ![alt text](<Screenshot 2024-03-28 at 17.16.44.png>)
 
 ![alt text](<Screenshot 2024-03-28 at 17.16.57.png>)
 
-# Build/Code Process
+## Backend (Day 1, 2)
 
-- DAY 1: (THURSDAY)
+### Backend set up and models
 
-- Our initial step was to determine the concept for our project. We agreed on creating an E-shop platform where sellers could showcase their products, and users could effortlessly browse, leave feedback, and make purchases.
-- We wireframed and designed our project which can be found above in the planning section of this README.
-- To kickstart our development process, we utilized some starter code and I hosted two repositories on GitHub – one for the backend and another for the frontend, ensuring seamless collaboration and access for my teammates.
-- With the setup completed, our team dedicated the first day to collaborative work, with myself driving for pair group programming starting with the backend.
-- Our initial focus was on the INDEX.TS file, where we established the start function responsible for connecting to the database via mongoose. We named our database "shopdb" and utilized app.listen to designate the port for running our database, along with the requisite middleware application.
+- To begin development, we utilized starter code and hosted repositories on GitHub for both the backend and frontend, facilitating collaboration. The first day was dedicated to collaborative work, with a focus on pair programming, starting with backend development.
+- In the INDEX.TS file, we established the start function to connect to the database via mongoose, naming it "shopdb". We utilized app.listen to designate the port for running the database and implemented necessary middleware applications.
 
 ![alt text](<Screenshot 2024-03-28 at 17.36.03.png>)
 
-- We created the product and user models required for adding data to our database and also seeded that database with test data. Below is our product model with typescript interface.
+- We created both the product and user models necessary for adding data to our database. Additionally, we seeded the database with test data to ensure functionality and facilitate testing of various features of our application. Below is our product model with typescript interface.
 
 ![alt text](<Screenshot 2024-03-28 at 17.39.11.png>)
+
+### Seeding
 
 - Here is our seeding function. Also, in this file we created test data which followed the product model format.
 
 ![alt text](<Screenshot 2024-03-28 at 17.40.09.png>)
 
-- With the models and test data configured, we imported them into our seeding file. We initially seeded the users, followed by populating products. During this process, we mapped over each product, adding an admin user. We ensured this worked correctly by inspecting the data in MongoDB Compass.
+- With our models and test data set up, we imported them into our seeding file. Initially, we seeded the users, followed by populating products. During this process, we iterated over each product, associating it with an admin user. We verified this by inspecting the data in MongoDB Compass.
 
-- Now that our database was populated, we proceeded to establish routes and controllers, facilitating data manipulation. Firstly, we crafted a product controller with a method to retrieve all entries from the database. Subsequently, we configured a route, complete with a URL endpoint to invoke this retrieval function, checking it worked using Insomnia. Once confirmed, we implemented another function to fetch a single product by its unique identifier.
+### Controllers & secure route
+
+- Once our database was populated, we established routes and controllers to facilitate data manipulation. Firstly, we crafted a product controller with a method to retrieve all entries from the database. Subsequently, we configured a route with a URL endpoint to invoke this retrieval function, testing it using Insomnia. Once confirmed, we implemented another function to fetch a single product by its unique identifier.
+- Next, we aimed to create a function within the product controller to add a product. We set up the function and corresponding route. However, we realized our model required a user association with each product, which necessitated the user's ID stored within the token provided upon login. Since we hadn't implemented sign-in and login functionalities, we couldn't obtain a token.
+- Acknowledging this limitation, we decided to prioritize setting up the user aspect of our project. We created a new file named user controller and established a function to create a user, along with the appropriate route in index.ts. Additionally, we revisited our user model to incorporate password hashing and validation to ensure strong passwords, unique emails, and valid email formats. We tested user creation in Insomnia and verified the new user's presence in MongoDB Compass.
 
 ![alt text](<Screenshot 2024-03-28 at 18.00.07.png>)
 
-- Next we wanted to set up a function inside of the product controller to add a product. We set up the function and the route but realised our model necessitated a user association with each product, which required the user's ID stored within the token provided upon login. However, as we have not set up sign in and log in, we were unable to get a token.
-- Recognizing this bottleneck, we decided to shift our focus towards setting up the user aspect of our project.
-- We set up a new file called user controller and set up a function to create a user along with the appropriate route in index.ts.
-- We also retook a look at our user model and added hashing to the passwords. We also added validation to ensure passwords were strong, and email and username we unique. Emails also are required to be in valid email formats. We tested we could add a user in insomnia and checked in compass the new user was there.
-
 ![alt text](<Screenshot 2024-03-28 at 18.03.21.png>)
 
-- DAY 2: (FRIDAY) BACKEND
-- We started the second day finishing up the user controller. We set up a login function that provides the user with a token. This token stored data about the user and is valid for 24 hours after generation.
-- We also added in a secure route function and added that to the add a product route. This secure route function would check the token being provided by the user to ensure it would a token given by our app and then allow access.
+- On the second day, we finalized the user controller by implementing a login function that generates a token for the user. This token stores user data and remains valid for 24 hours after generation.
+- Additionally, we introduced a secure route function and applied it to the "add a product" route. This function verifies the token provided by the user, ensuring it originates from our app, before granting access.
 
 ![alt text](<Screenshot 2024-03-28 at 18.07.54.png>)
 
 ![alt text](<Screenshot 2024-03-28 at 18.08.58.png>)
 
-- Now that we had access to a token we can now test the add a product function in Insomnia.
-- Next we looked at creating more functionality, with being able to delete a product and also edit a product. We created these functions in the product controller and added the correct routes in, with secure route function if required.
-- A function was added to send the current user from the backend to the front end as this will be required later in the front end.
-- Some custom error handling was added, along with a validation.ts file.
+- With access to a token, we proceeded to test the "add a product" function in Insomnia.
+- Following that, we focused on expanding functionality, incorporating features for deleting and editing products. We implemented these functions in the product controller and configured the corresponding routes, ensuring secure access where necessary.
+- Additionally, we introduced a function to transmit the current user data from the backend to the frontend, anticipating its requirement in future frontend development.
+- To enhance error handling, we integrated custom error management and created a validation.ts file for validation purposes.
 
-- DAY 2 (FRIDAY) FRONTEND
+## Frontend (Day 2, 3, 4, 5)
 
-- With our backend functionality successfully implemented and tested, our focus shifted towards developing the frontend using React. Leveraging some initial starter code provided, we commenced our frontend development process.
-- Inside app.tsx we created our router, and begin creating routes for each of the pages we had planned in our wireframe including adding a navbar.
+### Inital pages set up
+
+- With our backend functionality successfully implemented and tested, we shifted our focus to frontend development using React. Utilizing provided starter code, we began by setting up the router inside app.tsx and defining routes for each planned page from our wireframe, including the addition of a navbar.
 
 ![alt text](<Screenshot 2024-03-30 at 12.47.31.png>)
 
-- We set up some basic pages, using a seperate component for each page. We linked these via the router and added to the navbar and tested we could move from page to page via the navbar.
-- One of these components we called our list page, which we decided would be the page where we would display all of our products. Using an async function called fetchProducts inside of a useEffect targeted the route in the back end to get all of products and pulled all our data through to the front end. We then decided we wanted to display this data on individual cards on the page. Using a useState to set this data to a variable we were able to call this in our JSX and display all products on our page. We only showed on each card, the title, image and price as we have more data attached to each product that we wanted to show later on in more detail when we click on a card which we built later.
+- We set up basic pages, each represented by a separate component, and linked them using the router, integrating them into the navbar. Testing navigation through the navbar confirmed functionality.
+- One component, our list page, was designated to display all products. Leveraging an async function, fetchProducts, within a useEffect hook, we fetched product data from the backend route. Upon receiving the data, we utilized useState to store it, allowing us to render individual product cards on the page. Initially, we displayed only essential product information like title, image, and price on each card, with plans to showcase additional details upon card selection, a feature we later implemented.
 
 ![alt text](<Screenshot 2024-03-30 at 12.49.37.png>)
 
-- Next we set up 2 further components, 1 to sign up a user and 2 log in a user, targeting the correct routes built in the back end.
-- Finally, we set up a create product component also targeting the correct route in the back end.
+### Establishing different views for logged in users
 
-- DAY 3: (MONDAY)
-
-- Now we could log in a user on the front end we wanted a user that was logged in to have a different view to one not logged in. If a user was present, we hid some components on the navbar such as sign up and log in, but made other components visable such as create a product.
+- Next, we established two additional components: one for user sign-up and another for user login, both connecting to corresponding routes in the backend.
+- Lastly, we created a component for creating a product, linking it to the appropriate backend route.
+- Once users could log in on the frontend, we aimed to differentiate between logged-in and logged-out views. For logged-in users, certain navbar components like sign-up and log-in were hidden, while others like create-a-product became visible.
 
 ![alt text](<Screenshot 2024-03-30 at 12.51.02.png>)
 
-- We also set up another component to display an individual product by targeting the ID of that product and using a link to navigate upon clicking the card request. This link directs the user to a new page that exclusively showcases that specific product.
-- On this specific product page, we added a button to delete the product, targeting the correct backend route. Furthermore, we implemented additional functionality whereby only the user who created the product would see the delete button.
-- We made a modification to our product model to include a category. Consequently, we updated the create a product component to allow users to add a category as well. We provided hardcoded options for users to choose from in a dropdown menu for selection.
-- A search bar and dropdown were added to the product lists. These elements capture user input, refiltering the displayed data to show only results from the database that match the search criteria. However, there was a bug wherein the search would not reset to display all options when the dropdown filter had been used.
+### Displaying single products
+
+- We developed a component to display individual products, utilizing the product's ID and a link to navigate upon card click. This link directs users to a dedicated page showcasing the chosen product. On this page, we added a delete button targeting the correct backend route, visible only to the product creator.
+- Furthermore, we expanded our product model to include a category, updating the "create a product" component to allow users to add a category. We provided hardcoded options in a dropdown menu for selection.
 
 ![alt text](<Screenshot 2024-03-30 at 12.54.44.png>)
 
-- DAY 4: (TUESDAY)
+### Search bar and filtering
 
-- Firstly, I refactored some of the search criteria code, which now allows the filter to be reset and display all information.
-- Next, I restyled and refactored the individual product page to display additional information such as the description and category.
-- Additionally, a buy button was added to the individual product card for users who were not signed in.
+- We added a search bar and dropdown to product lists, allowing users to refine displayed data. However, we encountered a bug where the search did not reset after using the dropdown filter. We refactored the search criteria code to address this issue, ensuring that the filter resets correctly to display all information.
+- Afterward, we enhanced the styling and functionality of the individual product page to include additional details like description and category. Finally, we added a buy button to individual product cards for users who were not signed in.
 
 ![alt text](<Screenshot 2024-03-30 at 12.55.53.png>)
 
-- Functionality was implemented to display the number of units sold for each product, as well as a combined total across all products sold by a user. This feature was linked to the buy button, which increments the units sold each time it's pressed.
-- To enhance the realism of the shopping experience, clicking the buy button triggers a modal to appear, prompting users to input necessary details for the purchase. Additionally, a dropdown menu was introduced to allow users to select their country. Depending on their location, variable shipping costs could be added to the price.
-- A seller homepage was developed to showcase all the products listed by a seller, accompanied by their combined sales. Upon user login, they were automatically directed to this page for easy access and management of their listed products.
+### Purchasing, combining units sold & reviews
+
+- Implemented functionality to track units sold per product and total sales for each user. The buy button increments units sold upon purchase.
+- Enhanced shopping experience with a modal for purchase details input and a dropdown menu for selecting the country to calculate shipping costs.
+- Developed a seller homepage displaying all products listed by a seller, along with their combined sales, accessible upon user login for efficient product management.
 
 ![alt text](<Screenshot 2024-03-30 at 13.15.05.png>)
 
-- A reviews section was integrated into the individual product card, enabling users to leave feedback on products. This enhancement necessitated further modifications to the product modal, as reviews were now required to be associated with each product.
+- Integrated a reviews section into individual product cards, allowing users to leave feedback. This required adjustments to the product modal to associate reviews with each product.
 
-- DAY 5: (WEDNESDAY)
+## Final styling
 
-- We made final styling adjustments to enhance the appearance of the homepage, product lists, seller homepage, and individual product cards.
-- Additionally, we introduced a fun element by incorporating confetti to appear on the screen whenever a visitor made a purchase. Accompanied by a modal, a message popped up, notifying the user of the successful purchase.
+- We finalised styling adjustments across the homepage, product lists, seller homepage, and individual product cards to enhance their appearance.
+- Additionally, for added enjoyment, we implemented confetti that appears on the screen upon a successful purchase. Accompanied by a modal, users are notified of their purchase with a celebratory message.
 
 ![alt text](<Screenshot 2024-03-30 at 13.12.43.png>)
 
-- DAY 6: (THURSDAY)
-- With our project finished, the final day was dedicated to the deployment of our app.
-- The backend was deployed using MongoAtlas.
-- The frontend was deployed using Netlify.
+### Deployment
+
+- With our project completed, the final day was dedicated to deployment. We deployed the backend using MongoAtlas and the frontend using Netlify.
+
+# Screenshot Walkthrough
 
 - Visitor home page
   ![alt text](<Screenshot 2024-03-28 at 16.55.14.png>)
@@ -198,21 +211,22 @@ You must:
 
 # Challenges
 
-- Designing the database posed a significant challenge for us. We aimed to define the exact functionality we wanted our app to offer. However, as we expanded our app's capabilities over time, we encountered the need to revise our product and user models. Consequently, this had a cascading effect on many of the controllers we had built, requiring extensive refactoring to ensure the continued functionality of our code.
-- Working in a team of three presented unique challenges that I had not encountered on previous projects. Collaborating on the same components simultaneously often led to merging issues, necessitating close coordination among team members to maintain code coherence and integrity.
+- Designing the database presented a significant challenge as we aimed to define the exact functionality our app would offer. However, as we expanded our app's capabilities over time, we needed to revise our product and user models. This had a cascading effect on many controllers, requiring extensive refactoring to ensure continued functionality.
+- Working in a team of three presented unique challenges. Collaborating on the same components simultaneously often led to merging issues, requiring close coordination among team members to maintain code coherence and integrity.
 
 # Key Learnings/Takeaways
 
-- Working in a team introduced challenges like merging conflicts. However, we learned to collaborate effectively by discussing our changes and ensuring smooth integration.
-- It's crucial to be thorough when designing backend models. Adding new functionality later on may require model changes, leading to cascading effects on existing code and necessitating extensive refactoring.
-- Through this project, I gained valuable insights into styling, particularly in leveraging the features of Bulma effectively.
+- Working in a team posed challenges such as merging conflicts. However, we learned to collaborate effectively by discussing our changes and ensuring smooth integration.
+- Thoroughness in designing backend models is crucial. Adding new functionality later on may require model changes, leading to cascading effects on existing code and necessitating extensive refactoring.
+- This project provided valuable insights into styling, particularly in leveraging the features of Bulma effectively.
 
 # Bugs
 
-- To submit a review, currently, the page reloads. We implemented a window.location.reload event handler for the "Post a Review" button. However, this process is slow and not ideal for user experience (UX). Ideally, we would like to improve this by enabling users to post a review without reloading the window.
-- Additionally, further testing is needed to identify any bugs. As of writing this README, no bugs have been discovered, but thorough testing will ensure the robustness of the application.
+- To submit a review, the page currently reloads, which can be slow and not ideal for user experience (UX). We've implemented a window.location.reload event handler for the "Post a Review" button. However, we aim to improve this by enabling users to post a review without reloading the window.
+- On the homepage, there's an initial dark blue background before our background picture loads.
+- Furthermore, we need to conduct further testing to identify any bugs. As of writing this README, no bugs have been discovered, but thorough testing will ensure the robustness of the application.
 
 # Future Improvements
 
-- On our homepage, we've included a section for shopping by category, featuring separate cards that render each category available in our database. Clicking on any of these cards directs you to the products list page, where all products are displayed. With more time, we would have explored implementing a feature where clicking on a specific category card would automatically filter the products to display only those within the selected category.
-- Additionally, we intended to add a basket feature, allowing users to add multiple items to their basket for a convenient shopping experience.
+- On our homepage, we've included a section for shopping by category, showcasing separate cards for each category available in our database. Clicking on any of these cards takes you to the products list page, where all products are displayed. We considered implementing a feature where clicking on a specific category card would automatically filter the products to display only those within the selected category if we had more time.
+- Additionally, we planned to add a basket feature, enabling users to add multiple items to their basket for a convenient shopping experience.
