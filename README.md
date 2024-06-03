@@ -8,7 +8,7 @@ Gourmet E-Shop is a website where sellers can display their products for sale. S
 
 # Deployment link
 
-- https://gourmet-e-shop-front.netlify.app/products (frontend)
+- https://gourmet-e-shop-front.netlify.app/ (frontend)
 - https://gourmet-e-shop.netlify.app/api/products (backend)
 
 # Getting Started/Code Installation
